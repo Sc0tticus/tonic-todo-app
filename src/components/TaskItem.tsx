@@ -1,7 +1,7 @@
 'use client';
 
 import { Task } from '@/types/Task';
-import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 
 interface TaskItemProps {
 	task: Task;
@@ -15,24 +15,61 @@ export default function TaskItem({ task, onEdit, onDelete, onToggleComplete }: T
 		onToggleComplete(task.id, task.status !== 'completed');
 	};
 
+	const getPriorityColor = (priority: string) => {
+		switch (priority.toLowerCase()) {
+			case 'high':
+				return 'text-red-600 bg-red-50 border-red-200';
+			case 'medium':
+				return 'text-yellow-600 bg-yellow-50 border-yellow-200';
+			case 'low':
+				return 'text-green-600 bg-green-50 border-green-200';
+			default:
+				return 'text-gray-600 bg-gray-50 border-gray-200';
+		}
+	};
+
 	return (
-		<div className='flex items-center justify-between border rounded p-2'>
-			<div className='flex items-center gap-2'>
-				<input type='checkbox' checked={task.status === 'completed'} onChange={handleToggle} />
-				<div>
-					<p className='font-medium'>{task.title}</p>
-					<p className='text-sm text-gray-500'>
-						{task.priority} • {new Date(task.createdAt).toLocaleDateString()}
+		<div className='flex items-center justify-between py-4 border-b border-gray-100 last:border-b-0'>
+			<div className='flex items-center gap-4'>
+				<input
+					type='checkbox'
+					checked={task.status === 'completed'}
+					onChange={handleToggle}
+					className='w-5 h-5 text-green-600 border-gray-300 rounded focus:ring-green-500'
+				/>
+				<div className='flex-1'>
+					<h3
+						className={`font-medium text-gray-900 ${
+							task.status === 'completed' ? 'line-through text-gray-500' : ''
+						}`}
+					>
+						{task.title}
+					</h3>
+					<p className='text-sm text-gray-500 mt-1'>
+						{task.status === 'in progress' ? 'In progress' : task.status}
 					</p>
 				</div>
 			</div>
-			<div className='flex gap-2'>
-				<button onClick={() => onEdit(task)} className='text-gray-500 hover:text-gray-700'>
-					<PencilIcon className='h-5 w-5' />
-				</button>
-				<button onClick={() => onDelete(task.id)} className='text-red-500 hover:text-red-700'>
-					<TrashIcon className='h-5 w-5' />
-				</button>
+
+			<div className='flex items-center gap-3'>
+				<select
+					value={task.priority}
+					onChange={e => {
+						const updatedTask = { ...task, priority: e.target.value as Task['priority'] };
+						onEdit(updatedTask);
+					}}
+					className={`px-3 py-1 text-xs font-medium border rounded-full ${getPriorityColor(task.priority)}`}
+				>
+					<option value='High'>High</option>
+					<option value='Medium'>Medium</option>
+					<option value='Low'>Low</option>
+				</select>
+
+				<div className='relative'>
+					<button onClick={() => onDelete(task.id)} className='p-1 text-gray-400 hover:text-gray-600'>
+						<EllipsisHorizontalIcon className='h-5 w-5' />
+					</button>
+				</div>
 			</div>
 		</div>
 	);
