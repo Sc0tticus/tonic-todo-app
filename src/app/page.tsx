@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { Task } from '@/types/Task';
-import Header from '../components/Header';
-import TaskList from '../components/TaskList';
-import AddTaskModal from '../components/AddTaskModal';
+import Header from '@/components/Header';
+import TaskList from '@/components/TaskList';
+import AddTaskModal from '@/components/AddTaskModal';
 
 export default function Home() {
 	const [tasks, setTasks] = useState<Task[]>([]);
@@ -61,35 +61,35 @@ export default function Home() {
 	const progressPercentage = tasks.length > 0 ? Math.round((completedTasks.length / tasks.length) * 100) : 0;
 
 	return (
-		<div className='min-h-screen bg-gray-50'>
+		<div className='min-h-screen bg-gray-50 dark:bg-gray-900'>
 			<div className='max-w-4xl mx-auto p-6'>
 				<Header />
 
 				{/* Stats Cards */}
 				<div className='grid grid-cols-3 gap-6 mb-8'>
-					<div className='bg-white rounded-lg p-6 text-center'>
-						<h3 className='text-gray-500 text-sm font-medium mb-2'>Completed</h3>
-						<div className='text-3xl font-bold text-gray-900'>{completedTasks.length}</div>
+					<div className='bg-white dark:bg-gray-800 rounded-lg p-6 text-center'>
+						<h3 className='text-gray-500 dark:text-gray-400 text-sm font-medium mb-2'>Completed</h3>
+						<div className='text-3xl font-bold text-gray-900 dark:text-white'>{completedTasks.length}</div>
 						<div className='text-gray-400 text-sm'>Tasks</div>
 					</div>
-					<div className='bg-white rounded-lg p-6 text-center'>
-						<h3 className='text-gray-500 text-sm font-medium mb-2'>Pending</h3>
-						<div className='text-3xl font-bold text-gray-900'>{pendingTasks.length}</div>
+					<div className='bg-white dark:bg-gray-800 rounded-lg p-6 text-center'>
+						<h3 className='text-gray-500 dark:text-gray-400 text-sm font-medium mb-2'>Pending</h3>
+						<div className='text-3xl font-bold text-gray-900 dark:text-white'>{pendingTasks.length}</div>
 						<div className='text-gray-400 text-sm'>Tasks</div>
 					</div>
-					<div className='bg-white rounded-lg p-6 text-center'>
-						<h3 className='text-gray-500 text-sm font-medium mb-2'>Progress</h3>
-						<div className='text-3xl font-bold text-gray-900'>{progressPercentage}</div>
+					<div className='bg-white dark:bg-gray-800 rounded-lg p-6 text-center'>
+						<h3 className='text-gray-500 dark:text-gray-400 text-sm font-medium mb-2'>Progress</h3>
+						<div className='text-3xl font-bold text-gray-900 dark:text-white'>{progressPercentage}</div>
 						<div className='text-gray-400 text-sm'>%</div>
 					</div>
 				</div>
 
 				{/* Today's Tasks Section */}
-				<div className='bg-white rounded-lg p-6'>
+				<div className='bg-white dark:bg-gray-800 rounded-lg p-6'>
 					<div className='flex items-center justify-between mb-6'>
 						<div>
-							<h2 className='text-xl font-semibold text-gray-900'>Today&apos;s Task</h2>
-							<p className='text-gray-500 text-sm'>
+							<h2 className='text-xl font-semibold text-gray-900 dark:text-white'>Today&apos;s Task</h2>
+							<p className='text-gray-500 dark:text-gray-400 text-sm'>
 								{new Date().toLocaleDateString('en-US', {
 									day: 'numeric',
 									month: 'long',
@@ -120,8 +120,8 @@ export default function Home() {
 					/>
 
 					{tasks.length > 0 && (
-						<div className='flex items-center justify-between mt-6 pt-4 border-t'>
-							<span className='text-gray-500 text-sm'>{tasks.length} Tasks</span>
+						<div className='flex items-center justify-between mt-6 pt-4 border-t border-gray-200 dark:border-gray-700'>
+							<span className='text-gray-500 dark:text-gray-400 text-sm'>{tasks.length} Tasks</span>
 							<button
 								onClick={clearAllTasks}
 								className='text-green-600 hover:text-green-700 text-sm font-medium'
