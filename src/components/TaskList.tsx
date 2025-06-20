@@ -7,9 +7,10 @@ interface TaskListProps {
 	tasks: Task[];
 	onEdit: (task: Task) => void;
 	onToggleComplete: (id: string, completed: boolean) => void;
+	onDelete: (id: string) => void;
 }
 
-export default function TaskList({ tasks, onEdit, onToggleComplete }: TaskListProps) {
+export default function TaskList({ tasks, onEdit, onToggleComplete, onDelete }: TaskListProps) {
 	if (!tasks.length) {
 		return (
 			<div className='text-center py-12'>
@@ -24,7 +25,13 @@ export default function TaskList({ tasks, onEdit, onToggleComplete }: TaskListPr
 	return (
 		<div className='space-y-0'>
 			{tasks.map(task => (
-				<TaskItem key={task.id} task={task} onEdit={onEdit} onToggleComplete={onToggleComplete} />
+				<TaskItem
+					key={task.id}
+					task={task}
+					onEdit={onEdit}
+					onToggleComplete={onToggleComplete}
+					onDelete={onDelete}
+				/>
 			))}
 		</div>
 	);
