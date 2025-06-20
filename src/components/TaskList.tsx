@@ -6,11 +6,10 @@ import TaskItem from './TaskItem';
 interface TaskListProps {
 	tasks: Task[];
 	onEdit: (task: Task) => void;
-	onDelete: (id: string) => void;
 	onToggleComplete: (id: string, completed: boolean) => void;
 }
 
-export default function TaskList({ tasks, onEdit, onDelete, onToggleComplete }: TaskListProps) {
+export default function TaskList({ tasks, onEdit, onToggleComplete }: TaskListProps) {
 	if (!tasks.length) {
 		return (
 			<div className='text-center py-12'>
@@ -25,13 +24,7 @@ export default function TaskList({ tasks, onEdit, onDelete, onToggleComplete }: 
 	return (
 		<div className='space-y-0'>
 			{tasks.map(task => (
-				<TaskItem
-					key={task.id}
-					task={task}
-					onEdit={onEdit}
-					onDelete={onDelete}
-					onToggleComplete={onToggleComplete}
-				/>
+				<TaskItem key={task.id} task={task} onEdit={onEdit} onToggleComplete={onToggleComplete} />
 			))}
 		</div>
 	);

@@ -30,7 +30,7 @@ export default function Header() {
 				</div>
 				<div>
 					<h1 className='text-2xl font-bold text-gray-900 dark:text-white'>
-						Quick<span className='text-gray-600 dark:text-gray-400'>Task</span>
+						Tonic<span className='text-gray-600 dark:text-gray-400'>Tasks</span>
 					</h1>
 				</div>
 			</div>

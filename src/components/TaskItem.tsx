@@ -1,16 +1,15 @@
 'use client';
 
 import { Task } from '@/types/Task';
-import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
+import { PencilIcon } from '@heroicons/react/24/outline';
 
 interface TaskItemProps {
 	task: Task;
 	onEdit: (task: Task) => void;
-	onDelete: (id: string) => void;
 	onToggleComplete: (id: string, completed: boolean) => void;
 }
 
-export default function TaskItem({ task, onEdit, onDelete, onToggleComplete }: TaskItemProps) {
+export default function TaskItem({ task, onEdit, onToggleComplete }: TaskItemProps) {
 	const handleToggle = () => {
 		onToggleComplete(task.id, task.status !== 'completed');
 	};
@@ -71,10 +70,10 @@ export default function TaskItem({ task, onEdit, onDelete, onToggleComplete }: T
 
 				<div className='relative'>
 					<button
-						onClick={() => onDelete(task.id)}
+						onClick={() => onEdit(task)}
 						className='p-1 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300'
 					>
-						<EllipsisHorizontalIcon className='h-5 w-5' />
+						<PencilIcon className='h-5 w-5' />
 					</button>
 				</div>
 			</div>

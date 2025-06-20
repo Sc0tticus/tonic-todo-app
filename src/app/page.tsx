@@ -115,7 +115,6 @@ export default function Home() {
 							setTaskToEdit(task);
 							setShowModal(true);
 						}}
-						onDelete={deleteTask}
 						onToggleComplete={toggleComplete}
 					/>
 
