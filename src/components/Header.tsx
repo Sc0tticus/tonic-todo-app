@@ -2,19 +2,11 @@
 
 import { useState } from 'react';
 import { MagnifyingGlassIcon, UserIcon } from '@heroicons/react/24/outline';
+import { useDarkMode } from '../hooks/useDarkMode';
 
 export default function Header() {
 	const [showUserMenu, setShowUserMenu] = useState(false);
-	const [darkMode, setDarkMode] = useState(false);
-
-	const toggleDarkMode = () => {
-		setDarkMode(!darkMode);
-		if (!darkMode) {
-			document.documentElement.classList.add('dark');
-		} else {
-			document.documentElement.classList.remove('dark');
-		}
-	};
+	const { darkMode, toggleDarkMode } = useDarkMode();
 
 	return (
 		<header className='flex items-center justify-between mb-8'>
@@ -30,7 +22,7 @@ export default function Header() {
 				</div>
 				<div>
 					<h1 className='text-2xl font-bold text-gray-900 dark:text-white'>
-						Tonic<span className='text-gray-600 dark:text-gray-400'>Tasks</span>
+						Quick<span className='text-gray-600 dark:text-gray-400'>Task</span>
 					</h1>
 				</div>
 			</div>
