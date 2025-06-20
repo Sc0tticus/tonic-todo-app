@@ -14,8 +14,10 @@ export default function TaskList({ tasks, onEdit, onDelete, onToggleComplete }: 
 	if (!tasks.length) {
 		return (
 			<div className='text-center py-12'>
-				<div className='text-gray-400 text-lg mb-2'>No tasks yet</div>
-				<p className='text-gray-500 text-sm'>Click &quot;New Task&quot; to add your first task</p>
+				<div className='text-gray-400 dark:text-gray-500 text-lg mb-2'>No tasks yet</div>
+				<p className='text-gray-500 dark:text-gray-400 text-sm'>
+					Click &quot;New Task&quot; to add your first task
+				</p>
 			</div>
 		);
 	}
