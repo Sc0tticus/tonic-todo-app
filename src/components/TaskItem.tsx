@@ -1,15 +1,16 @@
 'use client';
 
 import { Task } from '@/types/Task';
-import { PencilIcon } from '@heroicons/react/24/outline';
+import { PencilIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 interface TaskItemProps {
 	task: Task;
 	onEdit: (task: Task) => void;
 	onToggleComplete: (id: string, completed: boolean) => void;
+	onDelete: (id: string) => void;
 }
 
-export default function TaskItem({ task, onEdit, onToggleComplete }: TaskItemProps) {
+export default function TaskItem({ task, onEdit, onToggleComplete, onDelete }: TaskItemProps) {
 	const handleToggle = () => {
 		onToggleComplete(task.id, task.status !== 'completed');
 	};
@@ -53,6 +54,13 @@ export default function TaskItem({ task, onEdit, onToggleComplete }: TaskItemPro
 			</div>
 
 			<div className='flex items-center gap-3'>
+				<button
+					onClick={() => onEdit(task)}
+					className='p-1 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300'
+				>
+					<PencilIcon className='h-5 w-5' />
+				</button>
+
 				<select
 					value={task.priority}
 					onChange={e => {
@@ -68,14 +76,12 @@ export default function TaskItem({ task, onEdit, onToggleComplete }: TaskItemPro
 					<option value='Low'>Low</option>
 				</select>
 
-				<div className='relative'>
-					<button
-						onClick={() => onEdit(task)}
-						className='p-1 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300'
-					>
-						<PencilIcon className='h-5 w-5' />
-					</button>
-				</div>
+				<button
+					onClick={() => onDelete(task.id)}
+					className='p-1 text-gray-400 hover:text-red-600 dark:text-gray-500 dark:hover:text-red-400'
+				>
+					<XMarkIcon className='h-5 w-5' />
+				</button>
 			</div>
 		</div>
 	);

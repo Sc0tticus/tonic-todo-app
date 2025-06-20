@@ -116,6 +116,7 @@ export default function Home() {
 							setShowModal(true);
 						}}
 						onToggleComplete={toggleComplete}
+						onDelete={deleteTask}
 					/>
 
 					{tasks.length > 0 && (
