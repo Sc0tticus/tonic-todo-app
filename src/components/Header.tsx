@@ -2,11 +2,9 @@
 
 import { useState } from 'react';
 import { MagnifyingGlassIcon, UserIcon } from '@heroicons/react/24/outline';
-import { useDarkMode } from '../hooks/useDarkMode';
 
 export default function Header() {
 	const [showUserMenu, setShowUserMenu] = useState(false);
-	const { darkMode, toggleDarkMode } = useDarkMode();
 
 	return (
 		<header className='flex items-center justify-between mb-8'>
@@ -43,21 +41,6 @@ export default function Header() {
 						<div className='absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50'>
 							<div className='px-4 py-2 border-b border-gray-200 dark:border-gray-700'>
 								<p className='text-sm text-gray-600 dark:text-gray-400'>ali@gmail.com</p>
-							</div>
-							<div className='px-4 py-3 flex items-center justify-between'>
-								<span className='text-sm text-gray-700 dark:text-gray-300'>Dark Mode</span>
-								<button
-									onClick={toggleDarkMode}
-									className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-										darkMode ? 'bg-green-600' : 'bg-gray-200'
-									}`}
-								>
-									<span
-										className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-											darkMode ? 'translate-x-6' : 'translate-x-1'
-										}`}
-									/>
-								</button>
 							</div>
 							<button className='w-full px-4 py-2 text-left text-sm text-green-600 hover:bg-gray-50 dark:hover:bg-gray-700'>
 								🔓 logout
