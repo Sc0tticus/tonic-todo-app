@@ -12,11 +12,16 @@ interface TaskListProps {
 
 export default function TaskList({ tasks, onEdit, onDelete, onToggleComplete }: TaskListProps) {
 	if (!tasks.length) {
-		return <p className='text-center text-gray-500'>No tasks yet</p>;
+		return (
+			<div className='text-center py-12'>
+				<div className='text-gray-400 text-lg mb-2'>No tasks yet</div>
+				<p className='text-gray-500 text-sm'>Click &quot;New Task&quot; to add your first task</p>
+			</div>
+		);
 	}
 
 	return (
-		<div className='flex flex-col gap-2'>
+		<div className='space-y-0'>
 			{tasks.map(task => (
 				<TaskItem
 					key={task.id}
