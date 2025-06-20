@@ -42,6 +42,16 @@ export default function Home() {
 		setTasks(prev => prev.map(t => (t.id === id ? { ...t, ...updated } : t)));
 	}
 
+	async function duplicateTask(task: Task) {
+		const duplicatedTask: Task = {
+			...task,
+			id: crypto.randomUUID(),
+			title: `${task.title} (Copy)`,
+			createdAt: new Date()
+		};
+		await addTask(duplicatedTask);
+	}
+
 	async function clearAllTasks() {
 		for (const task of tasks) {
 			await deleteTask(task.id);
@@ -117,6 +127,7 @@ export default function Home() {
 						}}
 						onToggleComplete={toggleComplete}
 						onDelete={deleteTask}
+						onDuplicate={duplicateTask}
 					/>
 
 					{tasks.length > 0 && (

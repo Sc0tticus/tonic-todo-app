@@ -8,9 +8,10 @@ interface TaskListProps {
 	onEdit: (task: Task) => void;
 	onToggleComplete: (id: string, completed: boolean) => void;
 	onDelete: (id: string) => void;
+	onDuplicate: (task: Task) => void;
 }
 
-export default function TaskList({ tasks, onEdit, onToggleComplete, onDelete }: TaskListProps) {
+export default function TaskList({ tasks, onEdit, onToggleComplete, onDelete, onDuplicate }: TaskListProps) {
 	if (!tasks.length) {
 		return (
 			<div className='text-center py-12'>
@@ -22,6 +23,7 @@ export default function TaskList({ tasks, onEdit, onToggleComplete, onDelete }: 
 		);
 	}
 
+	// Sort tasks by priority: High -> Medium -> Low
 	const sortedTasks = [...tasks].sort((a, b) => {
 		const priorityOrder = { High: 0, Medium: 1, Low: 2 };
 		return priorityOrder[a.priority] - priorityOrder[b.priority];
@@ -36,6 +38,7 @@ export default function TaskList({ tasks, onEdit, onToggleComplete, onDelete }: 
 					onEdit={onEdit}
 					onToggleComplete={onToggleComplete}
 					onDelete={onDelete}
+					onDuplicate={onDuplicate}
 				/>
 			))}
 		</div>
