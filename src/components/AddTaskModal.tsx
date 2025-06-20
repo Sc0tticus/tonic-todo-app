@@ -1,6 +1,6 @@
 'use client';
 
-import { Dialog, Transition } from '@headlessui/react';
+import { Dialog, Transition, TransitionChild } from '@headlessui/react';
 import { Fragment, useState, useEffect } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { Task } from '@/types/Task';
@@ -18,16 +18,18 @@ export default function AddTaskModal({ isOpen, onClose, onSave, task }: TaskModa
 	const [status, setStatus] = useState<'pending' | 'in progress' | 'completed'>('in progress');
 
 	useEffect(() => {
-		if (task) {
-			setTitle(task.title);
-			setPriority(task.priority);
-			setStatus(task.status);
-		} else {
-			setTitle('');
-			setPriority('Low');
-			setStatus('in progress');
+		if (isOpen) {
+			if (task) {
+				setTitle(task.title);
+				setPriority(task.priority);
+				setStatus(task.status);
+			} else {
+				setTitle('');
+				setPriority('Low');
+				setStatus('pending');
+			}
 		}
-	}, [task]);
+	}, [task, isOpen]);
 
 	function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
@@ -47,21 +49,11 @@ export default function AddTaskModal({ isOpen, onClose, onSave, task }: TaskModa
 	return (
 		<Transition appear show={isOpen} as={Fragment}>
 			<Dialog as='div' className='relative z-50' onClose={onClose}>
-				<Transition.Child
-					as={Fragment}
-					enter='ease-out duration-300'
-					enterFrom='opacity-0'
-					enterTo='opacity-100'
-					leave='ease-in duration-200'
-					leaveFrom='opacity-100'
-					leaveTo='opacity-0'
-				>
-					<div className='fixed inset-0 bg-black bg-opacity-50' />
-				</Transition.Child>
+				<div className='fixed inset-0 bg-black/50' aria-hidden='true' />
 
 				<div className='fixed inset-0 overflow-y-auto'>
 					<div className='flex min-h-full items-center justify-center p-4 text-center'>
-						<Transition.Child
+						<TransitionChild
 							as={Fragment}
 							enter='ease-out duration-300'
 							enterFrom='opacity-0 scale-95'
@@ -70,14 +62,19 @@ export default function AddTaskModal({ isOpen, onClose, onSave, task }: TaskModa
 							leaveFrom='opacity-100 scale-100'
 							leaveTo='opacity-0 scale-95'
 						>
-							<Dialog.Panel className='w-full max-w-lg transform overflow-hidden rounded-xl bg-white dark:bg-gray-800 p-6 text-left align-middle shadow-xl transition-all'>
+							<div
+								className='w-full max-w-lg transform overflow-hidden rounded-xl bg-white dark:bg-gray-800 p-6 text-left align-middle shadow-xl transition-all'
+								role='dialog'
+								aria-modal='true'
+								aria-labelledby='modal-title'
+							>
 								<div className='flex items-center justify-between mb-4'>
-									<Dialog.Title
-										as='h3'
+									<h3
+										id='modal-title'
 										className='text-xl font-semibold text-gray-900 dark:text-white'
 									>
-										Add Task
-									</Dialog.Title>
+										{task ? 'Edit Task' : 'Add Task'}
+									</h3>
 									<button
 										onClick={onClose}
 										className='p-1 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300'
@@ -87,7 +84,9 @@ export default function AddTaskModal({ isOpen, onClose, onSave, task }: TaskModa
 								</div>
 
 								<p className='text-gray-500 dark:text-gray-400 text-sm mb-6'>
-									Add a new task here. Click save when you&apos;re done.
+									{task
+										? 'Update the task details below.'
+										: "Add a new task here. Click save when you're done."}
 								</p>
 
 								<form className='space-y-6' onSubmit={handleSubmit}>
@@ -163,8 +162,8 @@ export default function AddTaskModal({ isOpen, onClose, onSave, task }: TaskModa
 										</button>
 									</div>
 								</form>
-							</Dialog.Panel>
-						</Transition.Child>
+							</div>
+						</TransitionChild>
 					</div>
 				</div>
 			</Dialog>
