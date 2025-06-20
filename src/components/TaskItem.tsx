@@ -75,20 +75,13 @@ export default function TaskItem({ task, onEdit, onToggleComplete, onDelete, onD
 			</div>
 
 			<div className='flex items-center gap-3'>
-				<select
-					value={task.priority}
-					onChange={e => {
-						const updatedTask = { ...task, priority: e.target.value as Task['priority'] };
-						onEdit(updatedTask);
-					}}
-					className={`px-3 py-1 text-xs font-medium border rounded-full dark:bg-gray-700 dark:border-gray-600 ${getPriorityColor(
+				<div
+					className={`px-3 py-1 text-xs font-medium border rounded-full dark:bg-gray-700 dark:border-gray-600 w-16 text-center ${getPriorityColor(
 						task.priority
 					)}`}
 				>
-					<option value='High'>High</option>
-					<option value='Medium'>Medium</option>
-					<option value='Low'>Low</option>
-				</select>
+					{task.priority}
+				</div>
 
 				<div className='relative' ref={menuRef}>
 					<button
