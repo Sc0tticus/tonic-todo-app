@@ -112,7 +112,7 @@ export default function AddTaskModal({ isOpen, onClose, onSave, task }: TaskModa
 											</label>
 											<div className='relative'>
 												<select
-													className='w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white appearance-none'
+													className='w-full pl-8 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white appearance-none'
 													value={priority}
 													onChange={e =>
 														setPriority(e.target.value as 'High' | 'Medium' | 'Low')
@@ -122,7 +122,7 @@ export default function AddTaskModal({ isOpen, onClose, onSave, task }: TaskModa
 													<option value='Medium'>Medium</option>
 													<option value='Low'>Low</option>
 												</select>
-												<div className='absolute left-3 top-1/2 transform -translate-y-1/2'>
+												<div className='absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none'>
 													<div
 														className={`w-2 h-2 rounded-full ${
 															priority === 'High'
