@@ -1,11 +1,8 @@
 'use client';
 
-import { useState } from 'react';
-import { MagnifyingGlassIcon, UserIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 export default function Header() {
-	const [showUserMenu, setShowUserMenu] = useState(false);
-
 	return (
 		<header className='flex items-center justify-between mb-8'>
 			<div className='flex items-center gap-3'>
@@ -20,34 +17,15 @@ export default function Header() {
 				</div>
 				<div>
 					<h1 className='text-2xl font-bold text-gray-900 dark:text-white'>
-						Tonic<span className='text-gray-600 dark:text-gray-400'>Tasks</span>
+						Tonic<span className='text-gray-600 dark:text-gray-400'>Todos</span>
 					</h1>
 				</div>
 			</div>
 
-			<div className='flex items-center gap-4'>
+			<div className='flex items-center'>
 				<button className='p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'>
 					<MagnifyingGlassIcon className='h-6 w-6' />
 				</button>
-				<div className='relative'>
-					<button
-						onClick={() => setShowUserMenu(!showUserMenu)}
-						className='p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
-					>
-						<UserIcon className='h-6 w-6' />
-					</button>
-
-					{showUserMenu && (
-						<div className='absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50'>
-							<div className='px-4 py-2 border-b border-gray-200 dark:border-gray-700'>
-								<p className='text-sm text-gray-600 dark:text-gray-400'>ali@gmail.com</p>
-							</div>
-							<button className='w-full px-4 py-2 text-left text-sm text-green-600 hover:bg-gray-50 dark:hover:bg-gray-700'>
-								🔓 logout
-							</button>
-						</div>
-					)}
-				</div>
 			</div>
 		</header>
 	);
