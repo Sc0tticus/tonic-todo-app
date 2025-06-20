@@ -22,9 +22,14 @@ export default function TaskList({ tasks, onEdit, onToggleComplete, onDelete }: 
 		);
 	}
 
+	const sortedTasks = [...tasks].sort((a, b) => {
+		const priorityOrder = { High: 0, Medium: 1, Low: 2 };
+		return priorityOrder[a.priority] - priorityOrder[b.priority];
+	});
+
 	return (
 		<div className='space-y-0'>
-			{tasks.map(task => (
+			{sortedTasks.map(task => (
 				<TaskItem
 					key={task.id}
 					task={task}
